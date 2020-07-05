@@ -1,0 +1,16 @@
+/gcc
+*.s
+/compile.vshost.exe.config
+/compile.vshost.exe.manifest
+/compile.exe
+/compile.exe.config
+/compile.pdb
+/compile.vshost.exe
+
+/debugger.vshost.exe.manifest
+/debugger.exe
+/debugger.exe.config
+/debugger.pdb
+/debugger.vshost.exe
+/debugger.vshost.exe.config
+/temp.sym

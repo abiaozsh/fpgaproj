@@ -1,0 +1,55 @@
+
+uint8_t MMCCard_cardinit() {
+  Sd2Card_type_ = 0;
+  // 16-bit init start time allows over a minute
+  uint32_t arg;
+
+  // set pin modes
+  SPI_CHIP_SELECT_INIT();
+  SPI_CHIP_SELECT_HIGH();
+  SPI_MISO_INIT();
+  SPI_MOSI_INIT();
+  SPI_SCK_INIT();
+
+
+  // must supply min of 74 clock cycles with CS high.
+  for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+
+  SPI_CHIP_SELECT_LOW();
+
+  // command to go idle in SPI mode
+  uint8_t ok = 0;
+  for(uint32_t i=0;i<100;i++){//SD_INIT_TIMEOUT*1000
+    if((Sd2Card_status_ = Sd2Card_cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
+    }
+    else
+    {
+      ok=1;
+      break;
+    }
+  }
+  if (!ok) {
+    errCode = 1;
+    goto fail;
+  }
+
+  ok=0;
+  for(uint32_t i=0;i<100;i++){//SD_INIT_TIMEOUT*1000
+    if(Sd2Card_cardCommand(CMD1, 0) == R1_READY_STATE) {
+      ok=1;
+      break;
+    }
+  }
+  if (!ok) {
+      errCode = 3;
+      goto fail;
+  }
+  
+  SPI_CHIP_SELECT_HIGH();
+
+  return true;
+
+ fail:
+  SPI_CHIP_SELECT_HIGH();
+  return false;
+}

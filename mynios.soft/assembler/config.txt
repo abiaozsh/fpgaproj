@@ -1,0 +1,143 @@
+#pattern                     @ text format @ ins format 0:i 1:r 2:j @    cmd
+
+#00 cmp1
+#ext                                                                   00000
+cmpgei reg, reg, ins         @          10 @                      0 @  00100
+cmplti reg, reg, ins         @          10 @                      0 @  01000
+cmpnei reg, reg, ins         @          10 @                      0 @  01100
+cmpeqi reg, reg, ins         @          10 @                      0 @  10000
+cmpgeui reg, reg, ins        @          10 @                      0 @  10100
+cmpltui reg, reg, ins        @          10 @                      0 @  11000
+#                                                                      11100
+
+#00 cmp ext
+#                                                                      00000
+cmpge reg, reg, reg          @          30 @                      1 @  00100
+cmplt reg, reg, reg          @          30 @                      1 @  01000
+cmpne reg, reg, reg          @          30 @                      1 @  01100
+cmpeq reg, reg, reg          @          30 @                      1 @  10000
+cmpgeu reg, reg, reg         @          30 @                      1 @  10100
+cmpltu reg, reg, reg         @          30 @                      1 @  11000
+#                                                                      11100
+
+#01 alu
+addi reg, reg, ins           @          10 @                      0 @  00001
+andi reg, reg, ins           @          10 @                      0 @  00101
+ori  reg, reg, ins           @          10 @                      0 @  01001
+xori reg, reg, ins           @          10 @                      0 @  01101
+muli reg, reg, ins           @          10 @                      0 @  10001
+andhi reg, reg, ins          @          10 @                      0 @  10101
+orhi reg, reg, ins           @          10 @                      0 @  11001
+xorhi reg, reg, ins          @          10 @                      0 @  11101
+
+#01 alu ext
+add reg, reg, reg            @          30 @                      1 @  00001
+and reg, reg, reg            @          30 @                      1 @  00101
+or reg, reg, reg             @          30 @                      1 @  01001
+xor reg, reg, reg            @          30 @                      1 @  01101
+mul reg, reg, reg            @          30 @                      1 @  10001
+sub reg, reg, reg            @          30 @                      1 @  10101
+nor reg, reg, reg            @          30 @                      1 @  11001
+#pushfp reg, reg, reg         @          30 @                      1 @  11101 @
+
+#10 mem
+ldw reg, regins              @          11 @                      0 @  00010
+stw reg, regins              @          11 @                      0 @  00110
+ldbu reg, regins             @          11 @                      0 @  01010
+ldb reg, regins              @          11 @                      0 @  01110
+ldhu reg, regins             @          11 @                      0 @  10010
+ldh reg, regins              @          11 @                      0 @  10110
+stb reg, regins              @          11 @                      0 @  11010
+sth reg, regins              @          11 @                      0 @  11110
+
+
+#10 shift1 ext
+slli reg, reg, ins            @         31 @                      1 @  00010
+srai reg, reg, ins            @         31 @                      1 @  00110
+srli reg, reg, ins            @         31 @                      1 @  01010
+roli reg, reg, ins            @         31 @                      1 @  01110
+#selectmux ins                                                         10010
+#                                                                      10110
+#                                                                      11010
+#                                                                      11110
+
+#11 shift2 ext
+sll reg, reg, reg            @          30 @                      1 @  00011
+sra reg, reg, reg            @          30 @                      1 @  00111
+srl reg, reg, reg            @          30 @                      1 @  01011
+rol reg, reg, reg            @          30 @                      1 @  01111
+#ror                                                                   10011
+#                                                                      10111
+#                                                                      11011
+#                                                                      11111
+
+
+#11 pc
+call sym                     @          22 @                      2 @  00011
+bge reg, reg, sym            @          15 @                      0 @  00111
+blt reg, reg, sym            @          15 @                      0 @  01011
+bne reg, reg, sym            @          15 @                      0 @  01111
+beq reg, reg, sym            @          15 @                      0 @  10011
+bgeu reg, reg, sym           @          15 @                      0 @  10111
+bltu reg, reg, sym           @          15 @                      0 @  11011
+#pcext                                                                 11111
+
+
+#11 pc ext
+callr reg                    @          50 @                      3 @  00011
+jmp reg                      @          51 @                      3 @  00111 @
+ret                          @          55 @                      3 @  00111 @
+setirq reg, reg, reg, ins    @          52 @                      3 @  01011 @ addr, flg, result, isSetAddr
+stoff reg                    @          53 @                      3 @  01111
+hlt ins                      @          54 @                      3 @  10011
+#fetchresult reg, ins
+reti                         @          56 @                      3 @  11011
+#irqcall                     @          57 @                      3 @  11111
+
+
+
+#ext: 
+#1 check
+#5 reg
+#5 reg
+#5 reg
+#6 ins6
+#5 extcmd
+#5 cmd 00000/11111
+
+
+
+
+
+
+#pushfp r4,r5,r0
+#pushfp r6,r7,r0
+#nop?
+#setmux 1 ;2,3 add h l  mul h l
+#fetchresult r2
+#setmux 1 ;2,3 add h l  mul h l
+#fetchresult r3
+
+
+
+
+
+
+
+
+
+
+#xxx                          @           0 @                      1 @  99 @                      xxx
+
+
+
+#jmpi sym                     @          21 @                      2 @  62 @          111110      0x3e*
+
+#jmpi ins                     @          23 @                      2 @  62 @          111110      0x3e*
+
+#stds
+#ldds
+#longcall
+#longjmp
+#divu reg, reg, reg           @          30 @                      1 @  36 @          100100      0x3A,0x24
+#div reg, reg, reg            @          30 @                      1 @  37 @          100101      0x3A,0x25

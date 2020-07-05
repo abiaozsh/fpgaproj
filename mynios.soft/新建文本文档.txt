@@ -1,0 +1,12 @@
+用 buscheck 做ram初始化检查
+
+https://code.google.com/archive/p/qp-gcc/downloads
+
+mingw-static-4.4.5-all.7z 
+
+
+
+https://osdn.net/projects/mingw/releases/
+
+
+https://github.com/stephanosio/tc32-soft-float

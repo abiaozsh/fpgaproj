@@ -1,0 +1,49 @@
+﻿
+		private void writeOld(byte[] buff, int offset)
+		{
+			int size = buff.Length / 2;//65536 * 2;//words
+			for (int i = 0; i < size; i++)
+			{
+				MemoryStream s = new MemoryStream();
+
+				int addr0 = ((i + offset)) & 0xFF;
+				int addr1 = ((i + offset) >> 8) & 0xFF;
+				int addr2 = ((i + offset) >> 16) & 0xFF;
+				//if (item.StartsWith("pr"))//put reg
+				portWrite((byte)(0x40 + 2), (byte)addr0, s);
+				portWrite((byte)(0x40 + 3), (byte)addr1, s);
+				portWrite((byte)(0x40 + 4), (byte)addr2, s);
+
+				portWrite((byte)(0x40 + 0), (byte)buff[i * 2 + 0], s);
+				portWrite((byte)(0x40 + 1), (byte)buff[i * 2 + 1], s);
+
+				//if (item.StartsWith("sc"))//special command
+				portWrite((byte)(0xA0), s);
+
+				s.Flush();
+				byte[] buff2 = s.ToArray();
+				sendall(buff2);
+			}
+		}
+
+
+		            MemoryStream s = new MemoryStream();
+            int addr = 0x30;
+            int addr0 = ((addr)) & 0xFF;
+            int addr1 = ((addr) >> 8) & 0xFF;
+            int addr2 = ((addr) >> 16) & 0xFF;
+            //if (item.StartsWith("pr"))//put reg
+            portWrite((byte)(0x40 + 2), (byte)addr0, s);
+            portWrite((byte)(0x40 + 3), (byte)addr1, s);
+            portWrite((byte)(0x40 + 4), (byte)addr2, s);
+
+            portWrite((byte)(0x40 + 0), (byte)0x55, s);
+            portWrite((byte)(0x40 + 1), (byte)0xAA, s);
+
+            //if (item.StartsWith("sc"))//special command
+            portWrite((byte)(0xA0), s);
+
+            s.Flush();
+            byte[] buff2 = s.ToArray();
+            sendall(buff2);
+

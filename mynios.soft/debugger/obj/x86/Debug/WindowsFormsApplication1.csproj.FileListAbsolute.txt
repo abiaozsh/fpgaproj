@@ -1,0 +1,10 @@
+D:\MyCode.github\fpga\mycpuproj\debugger\bin\Debug\WindowsFormsApplication1.exe.config
+D:\MyCode.github\fpga\mycpuproj\debugger\bin\Debug\WindowsFormsApplication1.exe
+D:\MyCode.github\fpga\mycpuproj\debugger\bin\Debug\WindowsFormsApplication1.pdb
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.Base.resources
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\MyCode.github\fpga\mycpuproj\debugger\obj\x86\Debug\WindowsFormsApplication1.pdb
